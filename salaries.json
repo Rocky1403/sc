@@ -82,5 +82,17 @@
     "totalTravel": 1100,
     "finalSalary": 26605.88235294118,
     "formattedDate": "19 March 2026"
+  },
+  {
+    "date": "2026-03-19T07:23:35.037Z",
+    "basic": 23000,
+    "days": 22,
+    "totalHours": 219,
+    "salaryPerDay": 1045.4545454545455,
+    "salaryPerHour": 122.99465240641712,
+    "baseSalary": 26935.828877005348,
+    "totalTravel": 1100,
+    "finalSalary": 27835.828877005348,
+    "formattedDate": "19 March 2026"
   }
 ]
