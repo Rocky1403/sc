@@ -175,30 +175,13 @@
       transition: all 0.3s ease;
     }
 
-    .input-icon-box.primary {
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-    }
+    .input-icon-box.primary { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
+    .input-icon-box.success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .input-icon-box.warning { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .input-icon-box.danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+    .input-icon-box.secondary { background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%); }
 
-    .input-icon-box.success {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    }
-
-    .input-icon-box.warning {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    }
-
-    .input-icon-box.danger {
-      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    }
-
-    .input-icon-box.secondary {
-      background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
-    }
-
-    .input-icon-box i {
-      color: white;
-      font-size: 0.85rem;
-    }
+    .input-icon-box i { color: white; font-size: 0.85rem; }
 
     .input-group input:focus ~ .input-icon-box,
     .input-group select:focus ~ .input-icon-box {
@@ -241,51 +224,19 @@
       transition: left 0.5s ease;
     }
 
-    .btn:hover::before {
-      left: 100%;
-    }
+    .btn:hover::before { left: 100%; }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: var(--white);
-    }
+    .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: var(--white); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3); }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
-    }
+    .btn-secondary { background: linear-gradient(135deg, var(--secondary) 0%, #06b6d4 100%); color: var(--white); }
+    .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(34, 211, 238, 0.3); }
 
-    .btn-secondary {
-      background: linear-gradient(135deg, var(--secondary) 0%, #06b6d4 100%);
-      color: var(--white);
-    }
+    .btn-success { background: linear-gradient(135deg, var(--success) 0%, #059669 100%); color: var(--white); }
+    .btn-success:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3); }
 
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(34, 211, 238, 0.3);
-    }
-
-    .btn-success {
-      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-      color: var(--white);
-    }
-
-    .btn-success:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-
-    .btn-outline:hover {
-      background: var(--primary);
-      color: var(--white);
-      transform: translateY(-2px);
-    }
+    .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: var(--white); transform: translateY(-2px); }
 
     .result-card {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -309,338 +260,113 @@
       animation: rotate 20s linear infinite;
     }
 
-    @keyframes rotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    @keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    .result-card.active {
-      display: block;
-      animation: slideIn 0.5s ease;
-    }
+    .result-card.active { display: block; animation: slideIn 0.5s ease; }
 
-    .result-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      position: relative;
-      z-index: 1;
-    }
+    .result-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; position: relative; z-index: 1; }
 
-    .result-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      margin-bottom: 15px;
-      position: relative;
-      z-index: 1;
-    }
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 15px; position: relative; z-index: 1; }
 
-    .result-item {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 12px;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
+    .result-item { background: rgba(255, 255, 255, 0.1); padding: 12px; border-radius: 10px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+    .result-label { font-size: 0.85rem; opacity: 0.9; margin-bottom: 4px; }
+    .result-value { font-size: 1.1rem; font-weight: 700; }
+    .value-positive { color: #86efac !important; }
+    .value-negative { color: #fca5a5 !important; }
 
-    .result-label {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      margin-bottom: 4px;
-    }
+    .final-salary { background: rgba(255, 255, 255, 0.2); padding: 15px; border-radius: 12px; text-align: center; margin-top: 15px; position: relative; z-index: 1; border: 1px solid rgba(255, 255, 255, 0.3); }
+    .final-salary-label { font-size: 0.95rem; opacity: 0.9; margin-bottom: 8px; }
+    .final-salary-value { font-size: 2rem; font-weight: 800; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); }
 
-    .result-value {
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
+    .salary-slip { background: var(--white); border-radius: 16px; padding: 25px; box-shadow: var(--card-shadow); display: none; position: relative; overflow: hidden; }
+    .salary-slip::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary), var(--secondary), var(--success)); }
+    .salary-slip.active { display: block; animation: slideIn 0.5s ease; }
 
-    .value-positive {
-      color: #86efac !important;
-    }
+    .slip-header { text-align: center; padding-bottom: 15px; border-bottom: 2px solid var(--light); margin-bottom: 15px; }
+    .slip-company h2 { color: var(--dark); font-size: 2rem; font-weight: 900; margin-bottom: 8px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .slip-company p { color: var(--gray); font-size: 0.95rem; }
+    .slip-date { margin-top: 10px; color: var(--dark); font-weight: 600; font-size: 0.9rem; }
 
-    .value-negative {
-      color: #fca5a5 !important;
-    }
+    .slip-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    .slip-table tr { border-bottom: 1px solid var(--light); }
+    .slip-table tr:last-child { border-bottom: none; }
+    .slip-table td { padding: 10px 0; }
+    .slip-table td:first-child { color: var(--dark); font-weight: 600; font-size: 0.9rem; }
+    .slip-table td:last-child { text-align: right; font-weight: 700; font-size: 1rem; }
+    .slip-positive { color: var(--success) !important; }
+    .slip-negative { color: var(--danger) !important; }
 
-    .final-salary {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      margin-top: 15px;
-      position: relative;
-      z-index: 1;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
+    .slip-total { margin-top: 15px; padding-top: 15px; border-top: 2px solid var(--light); }
+    .slip-total td { font-size: 1.2rem; font-weight: 800; color: var(--primary) !important; }
 
-    .final-salary-label {
-      font-size: 0.95rem;
-      opacity: 0.9;
-      margin-bottom: 8px;
-    }
-
-    .final-salary-value {
-      font-size: 2rem;
-      font-weight: 800;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .salary-slip {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 25px;
-      box-shadow: var(--card-shadow);
-      display: none;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .salary-slip::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 5px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--success));
-    }
-
-    .salary-slip.active {
-      display: block;
-      animation: slideIn 0.5s ease;
-    }
-
-    .slip-header {
-      text-align: center;
-      padding-bottom: 15px;
-      border-bottom: 2px solid var(--light);
-      margin-bottom: 15px;
-    }
-
-    .slip-company h2 {
-      color: var(--dark);
-      font-size: 2rem;
-      font-weight: 900;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .slip-company p {
-      color: var(--gray);
-      font-size: 0.95rem;
-    }
-
-    .slip-date {
-      margin-top: 10px;
-      color: var(--dark);
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .slip-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
-
-    .slip-table tr {
-      border-bottom: 1px solid var(--light);
-    }
-
-    .slip-table tr:last-child {
-      border-bottom: none;
-    }
-
-    .slip-table td {
-      padding: 10px 0;
-    }
-
-    .slip-table td:first-child {
-      color: var(--dark);
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .slip-table td:last-child {
-      text-align: right;
-      font-weight: 700;
-      font-size: 1rem;
-    }
-
-    .slip-positive {
-      color: var(--success) !important;
-    }
-
-    .slip-negative {
-      color: var(--danger) !important;
-    }
-
-    .slip-total {
-      margin-top: 15px;
-      padding-top: 15px;
-      border-top: 2px solid var(--light);
-    }
-
-    .slip-total td {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--primary) !important;
-    }
-
+    /* Updated Notification CSS */
     .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 12px 18px;
-      border-radius: 10px;
-      color: var(--white);
-      font-weight: 600;
-      font-size: 0.9rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      transform: translateX(400px);
-      transition: transform 0.3s ease;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      position: fixed; 
+      top: 20px; 
+      right: 20px; 
+      padding: 14px 22px; 
+      border-radius: 12px;
+      color: var(--white); 
+      font-weight: 600; 
+      font-size: 0.95rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      /* Start hidden state */
+      opacity: 0; 
+      transform: translateX(120%); 
+      pointer-events: none; /* Prevents clicking when hidden */
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease; 
+      z-index: 2000;
+      display: flex; 
+      align-items: center; 
+      gap: 10px;
+      max-width: 350px;
     }
 
     .notification.show {
-      transform: translateX(0);
+      opacity: 1; 
+      transform: translateX(0); 
+      pointer-events: auto; /* Allow clicks when shown */
     }
 
-    .notification.success {
-      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-    }
+    .notification.success { background: linear-gradient(135deg, var(--success) 0%, #059669 100%); }
+    .notification.error { background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%); }
+    .notification.warning { background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%); }
+    .notification.info { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); }
 
-    .notification.error {
-      background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+    .spinner {
+      animation: spin 1s linear infinite; display: none;
     }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    .notification.warning {
-      background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%);
-    }
-
-    .emoji-icon {
-      font-size: 1.5rem;
-      display: inline-block;
-      vertical-align: middle;
-    }
+    .emoji-icon { font-size: 1.5rem; display: inline-block; vertical-align: middle; }
 
     .icon-box {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      margin-right: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 8px; margin-right: 8px;
     }
+    .icon-box.primary { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
+    .icon-box.success { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .icon-box.warning { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .icon-box.danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+    .icon-box.secondary { background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%); }
+    .icon-box i { color: white; font-size: 1rem; }
 
-    .icon-box.primary {
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-    }
-
-    .icon-box.success {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    }
-
-    .icon-box.warning {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    }
-
-    .icon-box.danger {
-      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-    }
-
-    .icon-box.secondary {
-      background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
-    }
-
-    .icon-box i {
-      color: white;
-      font-size: 1rem;
-    }
-
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .animate-pulse {
-      animation: pulse 2s infinite;
-    }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    .animate-pulse { animation: pulse 2s infinite; }
 
     @media (max-width: 768px) {
-      .header h1 {
-        font-size: 1.8rem;
-      }
-
-      .input-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .button-group {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .result-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .final-salary-value {
-        font-size: 1.6rem;
-      }
-
-      .slip-company h2 {
-        font-size: 1.6rem;
-      }
+      .header h1 { font-size: 1.8rem; }
+      .input-grid { grid-template-columns: 1fr; }
+      .button-group { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .result-grid { grid-template-columns: 1fr; }
+      .final-salary-value { font-size: 1.6rem; }
+      .slip-company h2 { font-size: 1.6rem; }
+      .notification { right: 50%; transform: translate(50%, -150%); width: 90%; max-width: none; justify-content: center;}
+      .notification.show { transform: translate(50%, 0); }
     }
   </style>
 </head>
@@ -724,7 +450,7 @@
 
       <!-- Button Group -->
       <div class="button-group">
-        <button class="btn btn-primary" onclick="calculateSalary()">
+        <button class="btn btn-primary" id="calcBtn" onclick="triggerManualCalculate()">
           <div class="icon-box primary" style="width: 20px; height: 20px; margin-right: 6px;">
             <i class="fas fa-calculator"></i>
           </div>
@@ -878,30 +604,61 @@
   </div>
 
   <script>
+    // ==========================================
+    // HARDCODED GITHUB CONFIGURATION
+    // ==========================================
+    // PLEASE REPLACE THE VALUES BELOW WITH YOUR ACTUAL GITHUB DETAILS
+    const GITHUB_CONFIG = {
+        token: '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',       // Personal Access Token
+        owner: 'rocky1403',       // Repository Owner Username
+        repo: 'sc',              // Repository Name
+        path: 'data.json'           // File path to save data
+    };
+    // ==========================================
+
     const standardHoursPerDay = 8.5;
     const officeTax = 200;
     let currentOtMultiplier = 1;
+    let lastCalculationData = null;
+    let notificationTimeout = null; // Track notification timer
 
-    function showNotification(message, type = 'success') {
+    // --- Notification Logic ---
+    function showNotification(message, type = 'success', duration = 3000) {
       const notification = document.getElementById('notification');
       const notificationText = document.getElementById('notificationText');
+      const icon = notification.querySelector('i');
       
-      notification.className = `notification ${type}`;
+      // Clear any existing timer to prevent flickering
+      if (notificationTimeout) {
+        clearTimeout(notificationTimeout);
+        notificationTimeout = null;
+      }
+
+      // Set Content
       notificationText.textContent = message;
       
-      // Update icon based on type
-      const icon = notification.querySelector('i');
-      icon.className = type === 'success' ? 'fas fa-check-circle' : 
-                      type === 'error' ? 'fas fa-exclamation-circle' : 
-                      'fas fa-exclamation-triangle';
+      // Reset classes
+      notification.className = `notification ${type}`;
       
-      notification.classList.add('show');
+      // Set Icon
+      if (type === 'success') icon.className = 'fas fa-check-circle';
+      else if (type === 'error') icon.className = 'fas fa-exclamation-circle';
+      else if (type === 'info') icon.className = 'fas fa-cloud-upload-alt';
+      else icon.className = 'fas fa-exclamation-triangle';
       
-      setTimeout(() => {
+      // Show
+      // Small delay to allow CSS transition if re-showing same type
+      requestAnimationFrame(() => {
+        notification.classList.add('show');
+      });
+
+      // Set Timer to Hide
+      notificationTimeout = setTimeout(() => {
         notification.classList.remove('show');
-      }, 3000);
+      }, duration);
     }
 
+    // --- Calculation Logic ---
     function parseHoursInput(input) {
       input = (input || '').toString().trim();
       if (!input) return { decimal: 0, text: '0' };
@@ -920,7 +677,8 @@
       return { decimal: 0, text: '0' };
     }
 
-    function calculateSalary() {
+    // Main Calculate Function (Async now to handle API save)
+    async function calculateSalary() {
       const basicRaw = document.getElementById('basicSalary').value;
       const daysRaw = document.getElementById('workingDays').value;
       const totalHoursRaw = document.getElementById('totalHours').value;
@@ -930,34 +688,25 @@
       const days = parseFloat(daysRaw) || 0;
       const travelDaily = parseFloat(travelDailyRaw) || 0;
 
+      // Validation
       if (!basic || !days || !totalHoursRaw || isNaN(travelDailyRaw) || travelDailyRaw === '') {
-        showNotification('Please fill all fields correctly!', 'warning');
-        return;
+        // Don't show warning for auto-calc incomplete fields
+        return null;
       }
 
       const parsed = parseHoursInput(totalHoursRaw);
       const totalHoursDecimal = parsed.decimal;
 
-      // Step 1: Calculate salary per day
       const salaryPerDay = basic / days;
-      
-      // Step 2: Calculate salary per hour
       const salaryPerHour = salaryPerDay / standardHoursPerDay;
-      
-      // Step 3: Calculate base salary from actual hours worked
       const baseSalary = salaryPerHour * totalHoursDecimal;
-      
-      // Step 4: Calculate travel allowance
       const totalTravel = travelDaily * days;
-      
-      // Step 5: Calculate final salary
       const finalSalary = baseSalary + totalTravel - officeTax;
 
-      // Show result card
+      // Update UI
       const resultCard = document.getElementById('resultCard');
       resultCard.classList.add('active');
       
-      // Update result card with color coding
       document.getElementById('resBasic').textContent = `₹${basic.toFixed(2)}`;
       document.getElementById('resDays').textContent = days;
       document.getElementById('resHours').textContent = totalHoursDecimal;
@@ -968,15 +717,11 @@
       document.getElementById('resBase').textContent = `₹${baseSalary.toFixed(2)}`;
       document.getElementById('finalSalary').textContent = `₹${finalSalary.toFixed(2)}`;
 
-      // Update salary slip
       const salarySlip = document.getElementById('salarySlip');
       salarySlip.classList.add('active');
       
-      document.getElementById('slipDate').textContent = `Date: ${new Date().toLocaleDateString('en-IN', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })}`;
+      const dateStr = new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('slipDate').textContent = `Date: ${dateStr}`;
       
       document.getElementById('slipBasic').textContent = `₹${basic.toFixed(2)}`;
       document.getElementById('slipDays').textContent = days;
@@ -987,21 +732,123 @@
       document.getElementById('slipTravel').textContent = `+₹${totalTravel.toFixed(2)}`;
       document.getElementById('slipFinal').textContent = `₹${finalSalary.toFixed(2)}`;
 
-      // Show copy button
       document.getElementById('copyBtn').style.display = 'inline-flex';
 
-      showNotification('Salary calculated successfully!', 'success');
-      
-      return {
+      lastCalculationData = {
+        date: new Date().toISOString(),
         basic,
         days,
-        totalHoursDecimal,
+        totalHours: totalHoursDecimal,
         salaryPerDay,
         salaryPerHour,
         baseSalary,
         totalTravel,
-        finalSalary
+        finalSalary,
+        formattedDate: dateStr
       };
+
+      // Show calculating message (Short duration so it doesn't block if fast)
+      showNotification('Calculating...😊', 'info', 2000);
+
+      // Auto Save to GitHub
+      try {
+        await saveToGithub(lastCalculationData);
+        // Success notification is handled inside saveToGithub
+      } catch (error) {
+        console.error("Auto-save failed:", error);
+      }
+
+      return lastCalculationData;
+    }
+
+    // Wrapper for manual button click to ensure validation warning shows
+    function triggerManualCalculate() {
+      const basicRaw = document.getElementById('basicSalary').value;
+      const daysRaw = document.getElementById('workingDays').value;
+      const totalHoursRaw = document.getElementById('totalHours').value;
+      const travelDailyRaw = document.getElementById('travelDaily').value;
+
+      if (!basicRaw || !daysRaw || !totalHoursRaw || !travelDailyRaw) {
+        showNotification('Please fill all fields correctly!', 'warning');
+        return;
+      }
+      calculateSalary();
+    }
+
+    // --- GitHub API Logic ---
+    
+    // Helper to encode UTF-8 to Base64
+    function b64EncodeUnicode(str) {
+      return btoa(unescape(encodeURIComponent(str)));
+    }
+
+    async function saveToGithub(data) {
+      const config = GITHUB_CONFIG;
+
+      // Validate that user actually edited the config
+      if (config.token === 'YOUR_GITHUB_PAT_HERE' || config.owner === 'YOUR_GITHUB_USERNAME') {
+          showNotification('Please add credentials in code to enable auto-save.', 'warning', 5000);
+          return;
+      }
+      
+      const { token, owner, repo, path } = config;
+      
+      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+      const headers = {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      };
+
+      try {
+        // 1. Fetch current file to get SHA and content
+        let currentData = [];
+        let sha = null;
+
+        try {
+          const response = await fetch(url, { headers });
+          if (response.ok) {
+            const fileData = await response.json();
+            sha = fileData.sha;
+            // Decode content
+            const content = atob(fileData.content);
+            currentData = JSON.parse(content);
+            if (!Array.isArray(currentData)) currentData = [];
+          } else if (response.status !== 404) {
+            throw new Error(`GitHub API Error: ${response.status}`);
+          }
+          // If 404, file doesn't exist, we create it
+        } catch (e) {
+          console.log("Fetch check failed (might be 404 or network):", e);
+        }
+
+        // 2. Append new data
+        currentData.push(data);
+
+        // 3. Put (Update/Create) file
+        const payload = {
+          message: `Add salary entry ${new Date().toLocaleDateString()}`,
+          content: b64EncodeUnicode(JSON.stringify(currentData, null, 2)),
+          sha: sha // Include SHA only if updating existing file
+        };
+
+        const putResponse = await fetch(url, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify(payload)
+        });
+
+        if (!putResponse.ok) {
+          const errData = await putResponse.json();
+          throw new Error(errData.message || 'Failed to save to GitHub');
+        }
+
+        showNotification('Salary Calculated Success..!🎉', 'success');
+
+      } catch (error) {
+        console.error(error);
+        showNotification(`Saved locally. GitHub Error: ${error.message}`, 'error');
+      }
     }
 
     function copySalary() {
@@ -1014,64 +861,49 @@
     }
 
     async function downloadPDF() {
-      const computed = calculateSalary();
+      const computed = lastCalculationData; // Use last computed data
       if (!computed) {
-        showNotification('Please calculate salary first!', 'warning');
+        showNotification('No data to download. Please calculate first.', 'warning');
         return;
       }
 
       const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF({
-        unit: 'mm',
-        format: 'a4',
-        compress: true
-      });
+      const pdf = new jsPDF({ unit: 'mm', format: 'a4', compress: true });
 
-      // Set colors
       const primaryColor = [99, 102, 241];
       const successColor = [16, 185, 129];
       const dangerColor = [239, 68, 68];
       const darkColor = [30, 41, 59];
       const grayColor = [100, 116, 139];
 
-      // Company Name
       pdf.setFontSize(26);
       pdf.setFont(undefined, 'bold');
       pdf.setTextColor(...primaryColor);
       pdf.text('Betaara Software Pvt. Ltd.', 105, 30, { align: 'center' });
 
-      // Company Address
       pdf.setFontSize(11);
       pdf.setTextColor(...grayColor);
       pdf.setFont(undefined, 'normal');
       pdf.text('4004, Central Bazar, Varachha, Surat - 394210', 105, 40, { align: 'center' });
 
-      // Date
       pdf.setFontSize(10);
       pdf.setTextColor(...darkColor);
       pdf.setFont(undefined, 'bold');
-      pdf.text(`Date: ${new Date().toLocaleDateString('en-IN', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })}`, 105, 55, { align: 'center' });
+      pdf.text(`Date: ${computed.formattedDate}`, 105, 55, { align: 'center' });
 
-      // Divider line
       pdf.setDrawColor(...primaryColor);
       pdf.setLineWidth(0.5);
       pdf.line(20, 65, 190, 65);
 
-      // Salary Details Title
       pdf.setFontSize(16);
       pdf.setTextColor(...darkColor);
       pdf.setFont(undefined, 'bold');
       pdf.text('Salary Calculation Details', 105, 80, { align: 'center' });
 
-      // Salary Details
       const details = [
         { label: 'Basic Salary', value: `Rs. ${computed.basic.toFixed(2)}`, color: darkColor },
         { label: 'Working Days', value: computed.days.toString(), color: darkColor },
-        { label: 'Total Working Hours', value: computed.totalHoursDecimal.toString(), color: darkColor },
+        { label: 'Total Working Hours', value: computed.totalHours.toString(), color: darkColor },
         { label: 'Salary per Day', value: `Rs. ${computed.salaryPerDay.toFixed(2)}`, color: darkColor },
         { label: 'Salary per Hour', value: `Rs. ${computed.salaryPerHour.toFixed(2)}`, color: darkColor },
         { label: 'Calculated Base Salary', value: `Rs. +${computed.baseSalary.toFixed(2)}`, color: successColor, prefix: '+' },
@@ -1093,12 +925,10 @@
         yPosition += 10;
       });
 
-      // Final divider
       pdf.setDrawColor(...primaryColor);
       pdf.setLineWidth(1);
       pdf.line(20, yPosition + 5, 190, yPosition + 5);
 
-      // Final Salary
       yPosition += 15;
       pdf.setFontSize(18);
       pdf.setTextColor(...primaryColor);
@@ -1106,13 +936,11 @@
       pdf.text('Final Salary', 25, yPosition);
       pdf.text(`Rs. ${computed.finalSalary.toFixed(2)}`, 175, yPosition, { align: 'right' });
 
-      // Footer
       pdf.setFontSize(9);
       pdf.setTextColor(...grayColor);
       pdf.setFont(undefined, 'normal');
       pdf.text('This is a computer-generated salary slip.', 105, 280, { align: 'center' });
 
-      // Save PDF
       const fileName = `SalarySlip_${new Date().toISOString().slice(0, 10)}.pdf`;
       pdf.save(fileName);
       
@@ -1132,19 +960,24 @@
       document.getElementById('salarySlip').classList.remove('active');
       document.getElementById('copyBtn').style.display = 'none';
       
+      lastCalculationData = null;
       currentOtMultiplier = 1;
       showNotification('Form reset successfully!', 'success');
     }
 
-    // Event Listeners
+    // Event Listeners with Debounce for Auto-Calculation
     const inputs = ['basicSalary', 'workingDays', 'totalHours', 'travelDaily'];
+    let debounceTimer;
+
     inputs.forEach(id => {
       document.getElementById(id).addEventListener('input', () => {
-        // Auto-calculate when all fields are filled
-        const allFilled = inputs.every(inputId => document.getElementById(inputId).value);
-        if (allFilled) {
-          calculateSalary();
-        }
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          const allFilled = inputs.every(inputId => document.getElementById(inputId).value);
+          if (allFilled) {
+            calculateSalary();
+          }
+        }, 800); // Wait 800ms after typing stops before calculating
       });
     });
 
@@ -1169,9 +1002,6 @@
         currentOtMultiplier = v;
       }
     });
-
-    // Initialize
-    currentOtMultiplier = 1;
   </script>
 </body>
 </html>
