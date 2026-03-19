@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Salary Calculator - Betaara Software</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #22d3ee;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --dark: #1e293b;
+      --gray: #64748b;
+      --light: #f1f5f9;
+      --white: #ffffff;
+      --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --border-radius: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 15px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+      background-size: cover;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .header h1 {
+      color: var(--white);
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .header p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .main-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--dark);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 5px;
+    }
+
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 12px 45px 5px 12px;
+      border: 2px solid var(--light);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background: var(--white);
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .input-group label {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 600;
+      color: var(--gray);
+      font-size: 0.9rem;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      background: var(--white);
+      padding: 0 5px;
+      z-index: 1;
+    }
+
+    .input-group input:focus + label,
+    .input-group input:not(:placeholder-shown) + label,
+    .input-group select:focus + label,
+    .input-group select:valid + label {
+      top: 0;
+      font-size: 0.75rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .input-icon-box {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      opacity: 1;
+      visibility: visible;
+      transition: all 0.3s ease;
+    }
+
+    .input-icon-box.primary {
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    }
+
+    .input-icon-box.success {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+
+    .input-icon-box.warning {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+
+    .input-icon-box.danger {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    }
+
+    .input-icon-box.secondary {
+      background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+    }
+
+    .input-icon-box i {
+      color: white;
+      font-size: 0.85rem;
+    }
+
+    .input-group input:focus ~ .input-icon-box,
+    .input-group select:focus ~ .input-icon-box {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--secondary) 0%, #06b6d4 100%);
+      color: var(--white);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(34, 211, 238, 0.3);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+      color: var(--white);
+    }
+
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .result-card {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: 16px;
+      padding: 20px;
+      color: var(--white);
+      display: none;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .result-card.active {
+      display: block;
+      animation: slideIn 0.5s ease;
+    }
+
+    .result-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .result-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .result-label {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+
+    .result-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .value-positive {
+      color: #86efac !important;
+    }
+
+    .value-negative {
+      color: #fca5a5 !important;
+    }
+
+    .final-salary {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 15px;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .final-salary-label {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .final-salary-value {
+      font-size: 2rem;
+      font-weight: 800;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .salary-slip {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: var(--card-shadow);
+      display: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .salary-slip::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--success));
+    }
+
+    .salary-slip.active {
+      display: block;
+      animation: slideIn 0.5s ease;
+    }
+
+    .slip-header {
+      text-align: center;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--light);
+      margin-bottom: 15px;
+    }
+
+    .slip-company h2 {
+      color: var(--dark);
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slip-company p {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    .slip-date {
+      margin-top: 10px;
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .slip-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .slip-table tr {
+      border-bottom: 1px solid var(--light);
+    }
+
+    .slip-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .slip-table td {
+      padding: 10px 0;
+    }
+
+    .slip-table td:first-child {
+      color: var(--dark);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .slip-table td:last-child {
+      text-align: right;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .slip-positive {
+      color: var(--success) !important;
+    }
+
+    .slip-negative {
+      color: var(--danger) !important;
+    }
+
+    .slip-total {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 2px solid var(--light);
+    }
+
+    .slip-total td {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary) !important;
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification.success {
+      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+    }
+
+    .notification.error {
+      background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+    }
+
+    .notification.warning {
+      background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%);
+    }
+
+    .emoji-icon {
+      font-size: 1.5rem;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .icon-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      margin-right: 8px;
+    }
+
+    .icon-box.primary {
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    }
+
+    .icon-box.success {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+
+    .icon-box.warning {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+
+    .icon-box.danger {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    }
+
+    .icon-box.secondary {
+      background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+    }
+
+    .icon-box i {
+      color: white;
+      font-size: 1rem;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .animate-pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .input-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .final-salary-value {
+        font-size: 1.6rem;
+      }
+
+      .slip-company h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>
+        <span class="emoji-icon animate-pulse">Smart Calculater 🤓</span>
+      </h1>
+      <p>Betaara Software Pvt. Ltd. | Created By Akash...🐦‍🔥</p>
+    </div>
+
+    <!-- Main Card -->
+    <div class="main-card">
+      <h2 class="card-title">
+        <div class="icon-box primary">
+          <i class="fas fa-edit"></i>
+        </div>
+        Enter Details :
+      </h2>
+
+      <!-- Input Grid -->
+      <div class="input-grid">
+        <div class="input-group">
+          <input type="number" id="basicSalary" placeholder=" " min="0" step="0.01">
+          <label for="basicSalary">Basic Salary (₹)</label>
+          <div class="input-icon-box success">
+            <i class="fas fa-rupee-sign"></i>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input type="number" id="workingDays" placeholder=" " min="0" step="1">
+          <label for="workingDays">Working Days</label>
+          <div class="input-icon-box primary">
+            <i class="fas fa-calendar-day"></i>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="totalHours" placeholder=" ">
+          <label for="totalHours">Total Working Hours</label>
+          <div class="input-icon-box warning">
+            <i class="fas fa-clock"></i>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input type="number" id="travelDaily" placeholder=" " min="0" step="0.01">
+          <label for="travelDaily">Travel Allowance (per day ₹)</label>
+          <div class="input-icon-box secondary">
+            <i class="fas fa-route"></i>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <select id="otSelect">
+            <option value="0.5">0.5x</option>
+            <option value="0.75">0.75x</option>
+            <option value="1" selected>1x (Standard)</option>
+            <option value="1.25">1.25x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2">2x</option>
+            <option value="custom">Custom...</option>
+          </select>
+          <label for="otSelect">Overtime Multiplier</label>
+          <div class="input-icon-box danger">
+            <i class="fas fa-percentage"></i>
+          </div>
+        </div>
+
+        <div class="input-group" id="customOtWrap" style="display:none;">
+          <input type="number" id="customOt" placeholder=" " min="0" step="0.01">
+          <label for="customOt">Custom Multiplier</label>
+          <div class="input-icon-box primary">
+            <i class="fas fa-cog"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button Group -->
+      <div class="button-group">
+        <button class="btn btn-primary" onclick="calculateSalary()">
+          <div class="icon-box primary" style="width: 20px; height: 20px; margin-right: 6px;">
+            <i class="fas fa-calculator"></i>
+          </div>
+          Calculate
+        </button>
+
+        <button class="btn btn-secondary" id="copyBtn" onclick="copySalary()" style="display:none;">
+          <div class="icon-box secondary" style="width: 20px; height: 20px; margin-right: 6px;">
+            <i class="fas fa-copy"></i>
+          </div>
+          Copy
+        </button>
+
+        <button class="btn btn-success" id="downloadBtn" onclick="downloadPDF()">
+          <div class="icon-box success" style="width: 20px; height: 20px; margin-right: 6px;">
+            <i class="fas fa-download"></i>
+          </div>
+          PDF
+        </button>
+
+        <button class="btn btn-outline" onclick="resetForm()">
+          <div class="icon-box primary" style="width: 20px; height: 20px; margin-right: 6px;">
+            <i class="fas fa-redo"></i>
+          </div>
+          Reset
+        </button>
+      </div>
+
+      <!-- Result Card -->
+      <div class="result-card" id="resultCard">
+        <h3 class="result-title">
+          <span class="emoji-icon">📊</span>
+          Salary Calculation Results
+        </h3>
+
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="result-label">Basic Salary</div>
+            <div class="result-value" id="resBasic">₹0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Working Days</div>
+            <div class="result-value" id="resDays">0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Total Hours</div>
+            <div class="result-value" id="resHours">0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Salary per Day</div>
+            <div class="result-value" id="resPerDay">₹0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Salary per Hour</div>
+            <div class="result-value" id="resPerHour">₹0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Travel Allowance</div>
+            <div class="result-value value-positive" id="resTravel">+₹0</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Office Tax</div>
+            <div class="result-value value-negative" id="resTax">-₹200</div>
+          </div>
+
+          <div class="result-item">
+            <div class="result-label">Base Salary</div>
+            <div class="result-value" id="resBase">₹0</div>
+          </div>
+        </div>
+
+        <div class="final-salary">
+          <div class="final-salary-label">
+            <span class="emoji-icon">💵</span>
+            Final Salary (After Deductions)
+          </div>
+          <div class="final-salary-value" id="finalSalary">₹0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Salary Slip -->
+    <div class="salary-slip" id="salarySlip">
+      <div class="slip-header">
+        <div class="slip-company">
+          <h2>
+            Betaara Software Pvt. Ltd.
+          </h2>
+          <p>4004, Central Bazar, Varachha, Surat - 394210</p>
+          <div class="slip-date" id="slipDate">-</div>
+        </div>
+      </div>
+
+      <table class="slip-table">
+        <tr>
+          <td>Basic Salary</td>
+          <td id="slipBasic">₹0</td>
+        </tr>
+        <tr>
+          <td>Working Days</td>
+          <td id="slipDays">0</td>
+        </tr>
+        <tr>
+          <td>Total Working Hours</td>
+          <td id="slipHours">0</td>
+        </tr>
+        <tr>
+          <td>Salary per Day</td>
+          <td id="slipPerDay">₹0</td>
+        </tr>
+        <tr>
+          <td>Salary per Hour</td>
+          <td id="slipPerHour">₹0</td>
+        </tr>
+        <tr>
+          <td>Calculated Base Salary</td>
+          <td id="slipBaseSalary" class="slip-positive">+₹0</td>
+        </tr>
+        <tr>
+          <td>Travel Allowance</td>
+          <td id="slipTravel" class="slip-positive">+₹0</td>
+        </tr>
+        <tr>
+          <td>Office Tax Deduction</td>
+          <td class="slip-negative">-₹200</td>
+        </tr>
+      </table>
+
+      <table class="slip-table slip-total">
+        <tr>
+          <td>
+            <span class="emoji-icon">💰</span>
+            Final Salary
+          </td>
+          <td id="slipFinal">₹0</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Notification -->
+  <div class="notification" id="notification">
+    <i class="fas fa-check-circle"></i>
+    <span id="notificationText">Success!</span>
+  </div>
+
+  <script>
+    const standardHoursPerDay = 8.5;
+    const officeTax = 200;
+    let currentOtMultiplier = 1;
+
+    function showNotification(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      const notificationText = document.getElementById('notificationText');
+      
+      notification.className = `notification ${type}`;
+      notificationText.textContent = message;
+      
+      // Update icon based on type
+      const icon = notification.querySelector('i');
+      icon.className = type === 'success' ? 'fas fa-check-circle' : 
+                      type === 'error' ? 'fas fa-exclamation-circle' : 
+                      'fas fa-exclamation-triangle';
+      
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+
+    function parseHoursInput(input) {
+      input = (input || '').toString().trim();
+      if (!input) return { decimal: 0, text: '0' };
+      
+      if (input.includes(':')) {
+        const parts = input.split(':');
+        const rawHours = parseFloat(parts[0]) || 0;
+        const rawMinutes = parseFloat(parts[1]) || 0;
+        const decimal = rawHours + (rawMinutes / 60);
+        return { decimal: +decimal.toFixed(4), text: `${rawHours}:${String(rawMinutes).padStart(2, '0')}` };
+      }
+      
+      const asNum = parseFloat(input.replace(',', '.'));
+      if (!isNaN(asNum)) return { decimal: +asNum.toFixed(4), text: String(input) };
+      
+      return { decimal: 0, text: '0' };
+    }
+
+    function calculateSalary() {
+      const basicRaw = document.getElementById('basicSalary').value;
+      const daysRaw = document.getElementById('workingDays').value;
+      const totalHoursRaw = document.getElementById('totalHours').value;
+      const travelDailyRaw = document.getElementById('travelDaily').value;
+
+      const basic = parseFloat(basicRaw) || 0;
+      const days = parseFloat(daysRaw) || 0;
+      const travelDaily = parseFloat(travelDailyRaw) || 0;
+
+      if (!basic || !days || !totalHoursRaw || isNaN(travelDailyRaw) || travelDailyRaw === '') {
+        showNotification('Please fill all fields correctly!', 'warning');
+        return;
+      }
+
+      const parsed = parseHoursInput(totalHoursRaw);
+      const totalHoursDecimal = parsed.decimal;
+
+      // Step 1: Calculate salary per day
+      const salaryPerDay = basic / days;
+      
+      // Step 2: Calculate salary per hour
+      const salaryPerHour = salaryPerDay / standardHoursPerDay;
+      
+      // Step 3: Calculate base salary from actual hours worked
+      const baseSalary = salaryPerHour * totalHoursDecimal;
+      
+      // Step 4: Calculate travel allowance
+      const totalTravel = travelDaily * days;
+      
+      // Step 5: Calculate final salary
+      const finalSalary = baseSalary + totalTravel - officeTax;
+
+      // Show result card
+      const resultCard = document.getElementById('resultCard');
+      resultCard.classList.add('active');
+      
+      // Update result card with color coding
+      document.getElementById('resBasic').textContent = `₹${basic.toFixed(2)}`;
+      document.getElementById('resDays').textContent = days;
+      document.getElementById('resHours').textContent = totalHoursDecimal;
+      document.getElementById('resPerDay').textContent = `₹${salaryPerDay.toFixed(2)}`;
+      document.getElementById('resPerHour').textContent = `₹${salaryPerHour.toFixed(2)}`;
+      document.getElementById('resTravel').textContent = `+₹${totalTravel.toFixed(2)}`;
+      document.getElementById('resTax').textContent = `-₹${officeTax.toFixed(2)}`;
+      document.getElementById('resBase').textContent = `₹${baseSalary.toFixed(2)}`;
+      document.getElementById('finalSalary').textContent = `₹${finalSalary.toFixed(2)}`;
+
+      // Update salary slip
+      const salarySlip = document.getElementById('salarySlip');
+      salarySlip.classList.add('active');
+      
+      document.getElementById('slipDate').textContent = `Date: ${new Date().toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}`;
+      
+      document.getElementById('slipBasic').textContent = `₹${basic.toFixed(2)}`;
+      document.getElementById('slipDays').textContent = days;
+      document.getElementById('slipHours').textContent = totalHoursDecimal;
+      document.getElementById('slipPerDay').textContent = `₹${salaryPerDay.toFixed(2)}`;
+      document.getElementById('slipPerHour').textContent = `₹${salaryPerHour.toFixed(2)}`;
+      document.getElementById('slipBaseSalary').textContent = `+₹${baseSalary.toFixed(2)}`;
+      document.getElementById('slipTravel').textContent = `+₹${totalTravel.toFixed(2)}`;
+      document.getElementById('slipFinal').textContent = `₹${finalSalary.toFixed(2)}`;
+
+      // Show copy button
+      document.getElementById('copyBtn').style.display = 'inline-flex';
+
+      showNotification('Salary calculated successfully!', 'success');
+      
+      return {
+        basic,
+        days,
+        totalHoursDecimal,
+        salaryPerDay,
+        salaryPerHour,
+        baseSalary,
+        totalTravel,
+        finalSalary
+      };
+    }
+
+    function copySalary() {
+      const resultText = document.getElementById('resultCard').innerText;
+      navigator.clipboard.writeText(resultText).then(() => {
+        showNotification('Salary details copied to clipboard!', 'success');
+      }).catch(() => {
+        showNotification('Failed to copy details!', 'error');
+      });
+    }
+
+    async function downloadPDF() {
+      const computed = calculateSalary();
+      if (!computed) {
+        showNotification('Please calculate salary first!', 'warning');
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({
+        unit: 'mm',
+        format: 'a4',
+        compress: true
+      });
+
+      // Set colors
+      const primaryColor = [99, 102, 241];
+      const successColor = [16, 185, 129];
+      const dangerColor = [239, 68, 68];
+      const darkColor = [30, 41, 59];
+      const grayColor = [100, 116, 139];
+
+      // Company Name
+      pdf.setFontSize(26);
+      pdf.setFont(undefined, 'bold');
+      pdf.setTextColor(...primaryColor);
+      pdf.text('Betaara Software Pvt. Ltd.', 105, 30, { align: 'center' });
+
+      // Company Address
+      pdf.setFontSize(11);
+      pdf.setTextColor(...grayColor);
+      pdf.setFont(undefined, 'normal');
+      pdf.text('4004, Central Bazar, Varachha, Surat - 394210', 105, 40, { align: 'center' });
+
+      // Date
+      pdf.setFontSize(10);
+      pdf.setTextColor(...darkColor);
+      pdf.setFont(undefined, 'bold');
+      pdf.text(`Date: ${new Date().toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}`, 105, 55, { align: 'center' });
+
+      // Divider line
+      pdf.setDrawColor(...primaryColor);
+      pdf.setLineWidth(0.5);
+      pdf.line(20, 65, 190, 65);
+
+      // Salary Details Title
+      pdf.setFontSize(16);
+      pdf.setTextColor(...darkColor);
+      pdf.setFont(undefined, 'bold');
+      pdf.text('Salary Calculation Details', 105, 80, { align: 'center' });
+
+      // Salary Details
+      const details = [
+        { label: 'Basic Salary', value: `Rs. ${computed.basic.toFixed(2)}`, color: darkColor },
+        { label: 'Working Days', value: computed.days.toString(), color: darkColor },
+        { label: 'Total Working Hours', value: computed.totalHoursDecimal.toString(), color: darkColor },
+        { label: 'Salary per Day', value: `Rs. ${computed.salaryPerDay.toFixed(2)}`, color: darkColor },
+        { label: 'Salary per Hour', value: `Rs. ${computed.salaryPerHour.toFixed(2)}`, color: darkColor },
+        { label: 'Calculated Base Salary', value: `Rs. +${computed.baseSalary.toFixed(2)}`, color: successColor, prefix: '+' },
+        { label: 'Travel Allowance', value: `Rs. +${computed.totalTravel.toFixed(2)}`, color: successColor, prefix: '+' },
+        { label: 'Office Tax Deduction', value: `Rs. -${officeTax.toFixed(2)}`, color: dangerColor, prefix: '-' }
+      ];
+
+      let yPosition = 100;
+      pdf.setFontSize(11);
+      
+      details.forEach(detail => {
+        pdf.setTextColor(...detail.color);
+        pdf.setFont(undefined, 'bold');
+        const label = detail.prefix ? `${detail.prefix} ${detail.label}` : detail.label;
+        pdf.text(label, 25, yPosition);
+        
+        pdf.setFont(undefined, 'normal');
+        pdf.text(detail.value, 175, yPosition, { align: 'right' });
+        yPosition += 10;
+      });
+
+      // Final divider
+      pdf.setDrawColor(...primaryColor);
+      pdf.setLineWidth(1);
+      pdf.line(20, yPosition + 5, 190, yPosition + 5);
+
+      // Final Salary
+      yPosition += 15;
+      pdf.setFontSize(18);
+      pdf.setTextColor(...primaryColor);
+      pdf.setFont(undefined, 'bold');
+      pdf.text('Final Salary', 25, yPosition);
+      pdf.text(`Rs. ${computed.finalSalary.toFixed(2)}`, 175, yPosition, { align: 'right' });
+
+      // Footer
+      pdf.setFontSize(9);
+      pdf.setTextColor(...grayColor);
+      pdf.setFont(undefined, 'normal');
+      pdf.text('This is a computer-generated salary slip.', 105, 280, { align: 'center' });
+
+      // Save PDF
+      const fileName = `SalarySlip_${new Date().toISOString().slice(0, 10)}.pdf`;
+      pdf.save(fileName);
+      
+      showNotification('PDF downloaded successfully!', 'success');
+    }
+
+    function resetForm() {
+      document.getElementById('basicSalary').value = '';
+      document.getElementById('workingDays').value = '';
+      document.getElementById('totalHours').value = '';
+      document.getElementById('travelDaily').value = '';
+      document.getElementById('otSelect').value = '1';
+      document.getElementById('customOt').value = '';
+      document.getElementById('customOtWrap').style.display = 'none';
+      
+      document.getElementById('resultCard').classList.remove('active');
+      document.getElementById('salarySlip').classList.remove('active');
+      document.getElementById('copyBtn').style.display = 'none';
+      
+      currentOtMultiplier = 1;
+      showNotification('Form reset successfully!', 'success');
+    }
+
+    // Event Listeners
+    const inputs = ['basicSalary', 'workingDays', 'totalHours', 'travelDaily'];
+    inputs.forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        // Auto-calculate when all fields are filled
+        const allFilled = inputs.every(inputId => document.getElementById(inputId).value);
+        if (allFilled) {
+          calculateSalary();
+        }
+      });
+    });
+
+    const otSelect = document.getElementById('otSelect');
+    const customWrap = document.getElementById('customOtWrap');
+    const customOt = document.getElementById('customOt');
+
+    otSelect.addEventListener('change', () => {
+      const val = otSelect.value;
+      if (val === 'custom') {
+        customWrap.style.display = 'block';
+        currentOtMultiplier = parseFloat(customOt.value) || 1;
+      } else {
+        customWrap.style.display = 'none';
+        currentOtMultiplier = parseFloat(val) || 1;
+      }
+    });
+
+    customOt.addEventListener('input', () => {
+      const v = parseFloat(customOt.value);
+      if (!isNaN(v) && v >= 0) {
+        currentOtMultiplier = v;
+      }
+    });
+
+    // Initialize
+    currentOtMultiplier = 1;
+  </script>
+</body>
+</html>
